@@ -1,4 +1,4 @@
-CATWM
+DZWM
 =====
 
      /\___/\
@@ -11,8 +11,7 @@ CATWM
 Summary
 -------
 
-catwm is a very simple and lightweight tiling window manager.
-I will try to stay under 1000 SLOC.
+forked from catwm, wich is a very simple and lightweight tiling window manager that try to stay under 1000 SLOC.
 
 Status
 ------
@@ -56,6 +55,5 @@ Todo
 ----
  * Add multiple view ("desktop")
  * Switch to XCB
-
-If you have some particular request, just send me an e-mail, and I will see for it!
-
+ * Add a floating mode
+ 
