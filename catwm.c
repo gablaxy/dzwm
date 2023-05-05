@@ -106,6 +106,7 @@ static void swap_master();
 static void switch_mode();
 static void tile();
 static void update_current();
+static void kill_body(Window w, XEvent ke);
 
 // Include configuration file (need struct key)
 #include "config.h"
@@ -298,17 +299,21 @@ void keypress(XEvent *e) {
     }
 }
 
+void kill_body(Window w, XEvent ke) {
+	ke.type = ClientMessage;
+	ke.xclient.window = w;
+	ke.xclient.message_type = XInternAtom(dis, "WM_PROTOCOLS", True);
+	ke.xclient.format = 32;
+	ke.xclient.data.l[0] = XInternAtom(dis, "WM_DELETE_WINDOW", True);
+	ke.xclient.data.l[1] = CurrentTime;
+	XSendEvent(dis, w, False, NoEventMask, &ke);
+}
+
 void kill_client() {
 	if(current != NULL) {
 		//send delete signal to window
 		XEvent ke;
-		ke.type = ClientMessage;
-		ke.xclient.window = current->win;
-		ke.xclient.message_type = XInternAtom(dis, "WM_PROTOCOLS", True);
-		ke.xclient.format = 32;
-		ke.xclient.data.l[0] = XInternAtom(dis, "WM_DELETE_WINDOW", True);
-		ke.xclient.data.l[1] = CurrentTime;
-		XSendEvent(dis, current->win, False, NoEventMask, &ke);
+		kill_body(current->win, ke);
 		send_kill_signal(current->win);
 	}
 }
@@ -499,12 +504,7 @@ void select_desktop(int i) {
 void send_kill_signal(Window w) { 
     XEvent ke;
     ke.type = ClientMessage;
-    ke.xclient.window = w;
-    ke.xclient.message_type = XInternAtom(dis, "WM_PROTOCOLS", True);
-    ke.xclient.format = 32;
-    ke.xclient.data.l[0] = XInternAtom(dis, "WM_DELETE_WINDOW", True);
-    ke.xclient.data.l[1] = CurrentTime;
-    XSendEvent(dis, w, False, NoEventMask, &ke);
+    kill_body(w,ke);
 }
 
 void setup() {
