@@ -227,6 +227,13 @@ void configurerequest(XEvent *e) {
     XConfigureWindow(dis, ev->window, ev->value_mask, &wc);
 }
 
+void increase() {
+    if(master_size < sw-50) {
+        master_size += 10;
+        tile();
+    }
+}
+
 void decrease() {
     if(master_size > 50) {
         master_size -= 10;
@@ -268,7 +275,7 @@ unsigned long getcolor(const char* color) {
     return c.pixel;
 }
 
-void grabkeys() {
+void grabkeys() { // get all the keybinds defined in the config and map them
     int i;
     KeyCode code;
 
@@ -277,13 +284,6 @@ void grabkeys() {
         if((code = XKeysymToKeycode(dis,keys[i].keysym))) {
             XGrabKey(dis,code,keys[i].mod,root,True,GrabModeAsync,GrabModeAsync);
         }
-    }
-}
-
-void increase() {
-    if(master_size < sw-50) {
-        master_size += 10;
-        tile();
     }
 }
 
