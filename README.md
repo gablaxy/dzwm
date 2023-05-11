@@ -16,6 +16,7 @@ forked from catwm, wich is a very simple and lightweight tiling window manager t
 Status
 ------
  
+ catwm status updates
  * 05.07.19 -> v0.3. Multiple desktops and correct some bugs
  * 30.06.10 -> v0.2. Back again \o/
  * 15.03.10 -> v0.2. The wm is functional -> I only use this wm!
