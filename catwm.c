@@ -45,7 +45,7 @@ typedef union {
     const int i;
 } Arg;
 
-// Structs
+/* Structs */
 struct key {
     unsigned int mod;
     KeySym keysym;
@@ -71,7 +71,7 @@ struct desktop{
     client *current;
 };
 
-// Functions
+/* Functions */
 static void add_window(Window w);
 static void change_desktop(const Arg arg);
 static void client_to_desktop(const Arg arg);
@@ -111,7 +111,7 @@ static void kill_body(Window w, XEvent ke);
 // Include configuration file (need struct key)
 #include "config.h"
 
-// Variable
+/* Variables */
 static Display *dis;
 static int bool_quit;
 static int current_desktop;
@@ -373,6 +373,17 @@ void next_desktop() {
     change_desktop(a);
 }
 
+void prev_desktop() {
+    int tmp = current_desktop;
+    if(tmp == 0)
+        tmp = 9;
+    else
+        tmp--;
+
+    Arg a = {.i = tmp};
+    change_desktop(a);
+}
+
 void next_win() {
     client *c;
 
@@ -385,17 +396,6 @@ void next_win() {
         current = c;
         update_current();
     }
-}
-
-void prev_desktop() {
-    int tmp = current_desktop;
-    if(tmp == 0)
-        tmp = 9;
-    else
-        tmp--;
-
-    Arg a = {.i = tmp};
-    change_desktop(a);
 }
 
 void prev_win() {
