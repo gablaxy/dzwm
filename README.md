@@ -54,6 +54,7 @@ Bugs
 
 Todo
 ----
+ * Make sure it work after modifications
  * Add multiple view ("desktop")
  * Switch to XCB
  * Add a floating mode
