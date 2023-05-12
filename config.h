@@ -34,7 +34,7 @@
 
 // Mod (Mod1 == alt) and master size
 #define MOD             Mod1Mask
-#define MASTER_SIZE     0.6
+#define MASTER_SIZE     0.65
 
 // Colors
 #define FOCUS           "rgb:bc/57/66"
