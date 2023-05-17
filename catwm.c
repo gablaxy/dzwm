@@ -101,7 +101,6 @@ static void setup();
 static void sigchld(int unused);
 static void spawn(const Arg arg);
 static void start();
-//static void swap();
 static void swap_master();
 static void switch_mode();
 static void tile();
